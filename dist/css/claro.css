@@ -1,0 +1,27 @@
+body {
+  background-color: #e7e7e7;
+}
+
+.inicio_sesion {
+  color: rgb(45, 45, 45);
+}
+.errorLogin {
+  color: rgb(45, 45, 45);
+}
+.recuperarpass {
+  color: #535353;
+}
+.divrecpass:hover {
+  box-shadow: inset 1px 0px 20px rgba(255, 255, 255, 0.4);
+  color: #610f88;
+}
+.footer {
+  background-color: #01a199cc;
+  color: #e7e7e7;
+}
+.contacto {
+  color: #e7e7e7;
+}
+.contacto:hover {
+  color: #2a2a2a;
+}

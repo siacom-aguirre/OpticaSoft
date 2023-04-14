@@ -1,0 +1,30 @@
+body {
+  background-color: #303030;
+}
+.inicio_sesion img{
+  filter: invert(100%);
+}
+
+.inicio_sesion {
+  color: rgb(215, 215, 215);
+}
+.errorLogin {
+  color: #bababa;
+}
+.recuperarpass {
+  color: #c5c5c5;
+}
+.divrecpass:hover {
+  box-shadow: inset 1px 0px 20px rgba(0, 0, 0, 0.4);
+  color: #edccff;
+}
+.footer {
+  background-color: #01a199cc;
+  color: #2a2a2a;
+}
+.contacto {
+  color: #2a2a2a;
+}
+.contacto:hover {
+  color: white;
+}
