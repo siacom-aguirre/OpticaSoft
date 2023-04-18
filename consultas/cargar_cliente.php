@@ -1,14 +1,54 @@
 <?php
 
-$codigo_interno = md5($_POST['nombre_cliente']).'-'.$_POST['dni_cliente'];
-	
-Nuevocliente($_POST['dni_cliente'], ucfirst($_POST['nombre_cliente']), ucfirst($_POST['apellido_cliente']), ucfirst($_POST['descripcion']), $_POST['obra_social'], $_POST['fecha_creacion'], $codigo_interno);
+$codigo_interno = md5($_POST['nombre_cliente']);
 
-function Nuevocliente($dni_cliente, $nombre_cliente, $apellido_cliente, $descripcion, $obra_social, $fecha_creacion, $codigo_interno)
+$tipo_archivo = strtolower(pathinfo($_FILES["foto_receta"]["name"],PATHINFO_EXTENSION));
+$archivo = str_replace($_FILES["foto_receta"]["name"], $codigo_interno, $_FILES["foto_receta"]["name"]).'.'.$tipo_archivo;
+	
+Nuevocliente(ucfirst($_POST['nombre_cliente']), $_POST['fecha_cliente'], ucfirst($_POST['obra_social']), ucfirst($_POST['laboratorio']), $_POST['telefono'], ucfirst($_POST['doctor']), $archivo, $_POST['fecha_creacion'], $codigo_interno);
+
+function Nuevocliente($nombre_cliente, $fecha_cliente, $obra_social, $laboratorio, $telefono, $doctor, $foto_receta, $fecha_creacion, $codigo_interno)
 {
 	include 'conexion.php';
-	$sentencia= "INSERT INTO ov_clientes (dni_cliente, nombre_cliente, apellido_cliente, descripcion, obra_social, fecha_creacion, codigo_interno) VALUES ('".$dni_cliente."', '".$nombre_cliente."', '".$apellido_cliente."', '".$descripcion."', '".$obra_social."', '".$fecha_creacion."', '".$codigo_interno."')";
+	$sentencia= "INSERT INTO ov_clientes (nombre_cliente, fecha_cliente, obra_social, laboratorio, telefono, doctor, foto_receta, fecha_creacion, codigo_interno) VALUES ('".$nombre_cliente."', '".$fecha_cliente."', '".$obra_social."', '".$laboratorio."', '".$telefono."', '".$doctor."', '".$foto_receta."', '".$fecha_creacion."', '".$codigo_interno."')";
 	connect()->prepare($sentencia)->execute();
+}
+
+$file = $archivo;
+$validator = 1;
+$file_type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
+$url_temp = $_FILES["foto_receta"]["tmp_name"];
+$url_insert = dirname(__FILE__) . "/docs/img_recetas";
+
+$url_target = str_replace('\\', '/', $url_insert) . '/' . $file;
+
+if (!file_exists($url_insert)) {
+    mkdir($url_insert, 0777, true);
+};
+
+$file_size = $_FILES["foto_receta"]["size"];
+if ( $file_size > 10485760) {
+  echo '<script type="text/javascript">
+  alert("El archivo es muy pesado. Debe ser menor a 10Mb.");
+</script>';
+  $validator = 0;
+}
+
+if($file_type != "jpg" && $file_type != "jpeg" && $file_type != "png" && $file_type != "gif" ) {
+  echo "Solo se permiten imágenes tipo JPG, JPEG, PNG & GIF.";
+  $validator = 0;
+}
+
+if($validator == 1){
+    if (move_uploaded_file($url_temp, $url_target)) {
+        echo 'Archivo Subido.';
+    } else {
+        echo '<script type="text/javascript">
+		alert("Error al cargar el arhivo.");
+	</script>';
+    }
+}else{
+    echo "Error: el archivo no se ha cargado.";
 }
 
 
@@ -31,10 +71,10 @@ function getApellido($user){
 }
 $nombre_user = getNombre($_SESSION['username']).' '.getApellido($_SESSION['username']);
 
-auditoria($_SESSION['username'], $nombre_user, 'Insert', $_POST['fecha_creacion'], $_POST['dni_cliente'], ucfirst($_POST['nombre_cliente']), ucfirst($_POST['apellido_cliente']), ucfirst($_POST['descripcion']), $_POST['obra_social']);
+auditoria($_SESSION['username'], $nombre_user, 'Insert', $_POST['fecha_creacion'], ucfirst($_POST['nombre_cliente']), $_POST['fecha_cliente'], ucfirst($_POST['obra_social']), ucfirst($_POST['laboratorio']), $_POST['telefono'], ucfirst($_POST['doctor']), $archivo);
 
-function auditoria($username, $nombre_usuario, $accion, $fecha_auditoria, $dni_cliente, $nombre_cliente, $apellido_cliente, $descripcion_cliente, $obra_social){
-	$sentencia= "INSERT INTO ov_auditoria (username, nombre_usuario, accion, fecha_auditoria, dni_cliente, nombre_cliente, apellido_cliente, descripcion_cliente, obra_social) VALUES ('".$username."', '".$nombre_usuario."', '".$accion."', '".$fecha_auditoria."', '".$dni_cliente."', '".$nombre_cliente."', '".$apellido_cliente."', '".$descripcion_cliente."', '".$obra_social."') ";
+function auditoria($username, $nombre_usuario, $accion, $fecha_auditoria, $nombre_cliente, $fecha_cliente, $obra_social, $laboratorio, $telefono, $doctor, $foto_receta){
+	$sentencia= "INSERT INTO ov_auditoria (username, nombre_usuario, accion, fecha_auditoria, nombre_cliente, fecha_cliente, obra_social, laboratorio, telefono, doctor, foto_receta) VALUES ('".$username."', '".$nombre_usuario."', '".$accion."', '".$fecha_auditoria."', '".$nombre_cliente."', '".$fecha_cliente."', '".$obra_social."', '".$laboratorio."', '".$telefono."', '".$doctor."', '".$foto_receta."') ";
 	connect()->prepare($sentencia)->execute();
 }
 

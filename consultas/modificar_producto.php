@@ -9,15 +9,18 @@ function modificarProducto($codigo_producto, $nombre_producto, $descripcion, $pr
 	connect()->prepare($sentencia1)->execute();
 }
 
+$tipo_archivo = strtolower(pathinfo($_FILES["foto_producto"]["name"],PATHINFO_EXTENSION));
+
 
 if(!empty($_FILES["foto_producto"]["name"])){
+    $archivo = str_replace($_FILES["foto_producto"]["name"], $_POST['codigo_interno'], $_FILES["foto_producto"]["name"]).'.'.$tipo_archivo;
     
     include_once 'conexion.php';
-    $sentencia2= "UPDATE ov_productos SET foto_producto='".$_FILES["foto_producto"]["name"]."' WHERE codigo_interno='".$_POST['codigo_interno']."'";
+    $sentencia2= "UPDATE ov_productos SET foto_producto='".$archivo."' WHERE codigo_interno='".$_POST['codigo_interno']."'";
     connect()->prepare($sentencia2)->execute();
 }
 
-$file = str_replace(' ', '_', $_FILES["foto_producto"]["name"]);
+$file = $archivo;
 $validator = 1;
 $file_type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
 $url_temp = $_FILES["foto_producto"]["tmp_name"];
