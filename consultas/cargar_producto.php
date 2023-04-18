@@ -1,8 +1,11 @@
 <?php
 
 $codigo_interno = md5($_POST['nombre_producto']).'-'.$_POST['codigo_producto'];
+
+$tipo_archivo = strtolower(pathinfo($_FILES["foto_producto"]["name"],PATHINFO_EXTENSION));
+$archivo = str_replace($_FILES["foto_producto"]["name"], $codigo_interno, $_FILES["foto_producto"]["name"]).'.'.$tipo_archivo;
 	
-NuevoProducto($_POST['codigo_producto'], ucfirst($_POST['nombre_producto']), ucfirst($_POST['descripcion']), $_POST['precio_producto'], $_FILES["foto_producto"]["name"], $_POST['estado_producto'], $_POST['fecha_creacion'], $codigo_interno);
+NuevoProducto($_POST['codigo_producto'], ucfirst($_POST['nombre_producto']), ucfirst($_POST['descripcion']), $_POST['precio_producto'], $archivo, $_POST['estado_producto'], $_POST['fecha_creacion'], $codigo_interno);
 
 function NuevoProducto($codigo_producto, $nombre_producto, $descripcion, $precio_producto, $foto_producto, $estado_producto, $fecha_creacion, $codigo_interno){
 	include 'conexion.php';
@@ -10,7 +13,7 @@ function NuevoProducto($codigo_producto, $nombre_producto, $descripcion, $precio
 	connect()->prepare($sentencia)->execute();
 }
 
-$file = str_replace(' ', '_', $_FILES["foto_producto"]["name"]);
+$file = $archivo;
 $validator = 1;
 $file_type = strtolower(pathinfo($file,PATHINFO_EXTENSION));
 $url_temp = $_FILES["foto_producto"]["tmp_name"];

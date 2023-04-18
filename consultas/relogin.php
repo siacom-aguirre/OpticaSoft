@@ -59,6 +59,7 @@ if (isset($_POST['login'])) {
                 ?>
             </form>
         </div>
+        <a href="nuevo_usuario"><div class="nuevo_usu">Nuevo usuario</div></a>
     </div>
     <?php include('../footer.php'); ?>
 </body>
