@@ -31,6 +31,11 @@ $sql = "SELECT * FROM ov_clientes WHERE codigo_interno='{$codigo}'";
 $query = connect()->prepare($sql);
 $query->execute();
 foreach($query as $cliente){
+    if($cliente['foto_receta'] != '.'){
+        $fotoP = './consultas/docs/img_recetas/'.$cliente['foto_receta'];
+    }else{
+        $fotoP = './consultas/docs/img/subir_receta.png';
+    }
     echo '<center>
     <div id="contenido">
 			<div style="margin: auto; width: 800px; border-collapse: separate; border-spacing: 10px 5px;">
@@ -38,36 +43,51 @@ foreach($query as $cliente){
 					<h1>Detalles del cliente</h1>
 				</span>
 				<br>
-				<form action="" method="POST" style="border-collapse: separate; border-spacing: 10px 5px;">
-                    <table>
+				    <form action="" method="POST" style="border-collapse: separate; border-spacing: 10px 5px;">
+                        <table>
                         <tr>
-                            <td class="Label"><label for="codigo_cliente">Documento del cliente: </label></td>
-                            <td><div style="width: 300px; color:beige;">'.$cliente['dni_cliente'].'</div></td>
-                        </tr>
-                        <tr>
-                            <td class="Label" style="color:#9ed2c1;"><label for="nombre_cliente">Nombre del cliente: </label></td>
-                            <td><div style="width: 300px; color:beige;">'.$cliente['nombre_cliente'].'</div></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="Label" style="color:#9ed2c1;"><label for="apellido_cliente">Apellido del cliente: </label></td>
-                            <td><div style="width: 300px; color:beige;">'.$cliente['apellido_cliente'].'</div></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="Label"><label for="descripcion">Descripción: </label></td>
-                            <td><div style="max-width: 300px; color:beige;">'.$cliente['descripcion'].'</div></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="Label"><label for="obra_social">Obra Social: </label></td>
-                            <td><div style="width: 300px; color:beige;">'.$cliente['obra_social'].'</div></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td><input type="hidden" name="fecha_creacion" value="'.$cliente['dni_cliente'].'">
+                            <td class="Label"><label>Sr/a: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['nombre_cliente'].'</div></td>
+                            <td rowspan="7">
+                                    <section class="seccionPf">
+                                    <img class="img-responsive" src="'.$fotoP.'" />
+                                    <div class="vistaPf"><img src="'.$fotoP.'" /></div>
+                                    </section>
                             </td>
+                        </tr>
+                        <tr>
+                            <td class="Label"><label>Fecha: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['fecha_cliente'].'</div></td>
                             <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label" align="top"><label>Obra Social: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['obra_social'].'</div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label" align="top"><label>Laboratorio: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['laboratorio'].'</div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label" align="top"><label>Telefono: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['telefono'].'</div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label" align="top"><label>Doctor: </label></td>
+                            <td><div style="width: 200px; color:beige;">'.$cliente['doctor'].'</div></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td align="right"></td>
+                            <td align="center"></td>
                         </tr>
                     </table>
                 <br>

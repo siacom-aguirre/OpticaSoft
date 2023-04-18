@@ -177,6 +177,30 @@ function checkUsuario(){
         </center>';
     }
 }
+function nuevoUsuario(){
+    include_once './primer_usuario.php';
+    echo '<center>
+        <div>
+            <div><img src="./docs/img/imgregistro.png" alt=""></div>
+            <div><h1>Nuevo usuario</h1></div>
+            <div>
+                <div style="width: 50%;" class="container my-5">
+                <h6 style="color:#981a26">> Todos los campos son obligatorios.</h6>
+
+                <form id="formulario" action="./insertuser.php" method="POST">
+                <input type="text" name="nombre_usuario" placeholder="Nombre" class="form-control my-3" required autofocus>
+                <input type="text" name="apellido_usuario" placeholder="Apellido" class="form-control my-3" required>
+                <input maxlength="8" type="number" name="username" placeholder="DNI" class="form-control my-3" required>
+                <input type="password" name="passwd" placeholder="Contraseña" class="form-control my-3" required>
+                <input type="password" name="passwd2" placeholder="Repetir contraseña" class="form-control my-3" required>
+                <input type="hidden" name="privilegio" value="Administrador">
+                <button class="btn btn-primary2" type="reset">Resetear campos</button>
+                <button class="btn btn-primary" type="submit">Enviar</button>
+                </form>
+
+            </div></div>
+        </center>';
+}
 function getUsuario(){
     $sql = "SELECT * FROM ov_usuarios";
     $query = connect()->prepare($sql);
@@ -239,10 +263,13 @@ function trProductos(){
 
 function trClientes(){
     echo '<tr>
-    <th style="width:250px">DNI</th>
-    <th>Cliente</th>
-    <th>Descripción</th>
-    <th style="width:250px">Obra Social</th>';
+    <th></th>
+    <th style="width:250px">Cliente</th>
+    <th>Fecha</th>
+    <th>Obra Social</th>
+    <th>Laboratorio</th>
+    <th>Telefono</th>
+    <th>Doctor</th>';
     if(isset($_SESSION['username'])){
         echo '<th>Opciones</th>';
     }
@@ -290,10 +317,20 @@ function getFotoPerfil($user){
     }
 }
 
-/////////////////// BUSCAR PRODUCTO:
-function buscarProducto(){
-    // Codigo.
+function versionSoft(){
+    $sql = "SELECT * FROM version_soft order by id_version desc";
+    $query = connect()->prepare($sql);
+    $query->execute();
+    $results = $query -> fetchAll(PDO::FETCH_OBJ);
+    if ($query->rowCount() > 0) {
+            foreach ($results as $rv) {
+                    echo '<tr>
+                            <td align="center">'.$rv->version.'</td>
+                            <td align="center">'.$rv->fecha.'</td>
+                            <td>'.$rv->descripcion.'</td>
+                    </tr>';
+            }
+    }
 }
-
 
 ?>

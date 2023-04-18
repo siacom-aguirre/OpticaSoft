@@ -18,10 +18,10 @@ if(!empty($_POST)){
     $aKeyword = explode(" ", $_POST['buscar']);
     $filtro = "WHERE nombre_cliente LIKE LOWER('%".$aKeyword[0]."%') OR descripcion LIKE LOWER('%".$aKeyword[0]."%')";
     $query ="SELECT * FROM ov_clientes
-    WHERE dni_cliente LIKE LOWER('%".$aKeyword[0]."%') 
-    OR nombre_cliente LIKE LOWER('%".$aKeyword[0]."%')
-    OR apellido_cliente LIKE LOWER('%".$aKeyword[0]."%')
-    OR descripcion LIKE LOWER('%".$aKeyword[0]."%')
+    WHERE nombre_cliente LIKE LOWER('%".$aKeyword[0]."%') 
+    OR fecha_cliente LIKE LOWER('%".$aKeyword[0]."%')
+    OR telefono LIKE LOWER('%".$aKeyword[0]."%')
+    OR obra_social LIKE LOWER('%".$aKeyword[0]."%')
     ";
   
     for($i = 1; $i < count($aKeyword); $i++) {
@@ -42,9 +42,9 @@ if(!empty($_POST)){
         echo "<br><br><table class='table table-striped'>
         <thead>";
         echo '<tr>
-    <th>DNI</th>
     <th>Cliente</th>
-    <th>Descripción</th>
+    <th>Fecha</th>
+    <th>Teléfono</th>
     <th>Obra Social</th>
     </tr>';
         echo "</thead>";
@@ -53,9 +53,9 @@ if(!empty($_POST)){
 
             $idProd = $row['dni_cliente'];
             echo "<div><tr class='resul'>
-                <td>". resaltar_frase($row['dni_cliente'] ,$_POST['buscar']) . "</td>
-                <td>". resaltar_frase($row['nombre_cliente'] ,$_POST['buscar']) . " ".resaltar_frase($row['apellido_cliente'] ,$_POST['buscar'])."</td>
-                <td>". resaltar_frase($row['descripcion'] ,$_POST['buscar']) . "</td>
+                <td>". resaltar_frase($row['nombre_cliente'] ,$_POST['buscar']) ."</td>
+                <td>". resaltar_frase($row['fecha_cliente'] ,$_POST['buscar']) . "</td>
+                <td>". resaltar_frase($row['telefono'] ,$_POST['buscar']) . "</td>
                 <td>". resaltar_frase($row['obra_social'] ,$_POST['buscar']) . "</td>
                 <td><a href='?lnk=detalle_cl&codigo=". $row['codigo_interno'] . "'>abrir</a></td></tr></div></div>";
         }

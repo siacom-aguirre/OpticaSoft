@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2023 a las 09:19:53
+-- Tiempo de generación: 18-04-2023 a las 23:01:09
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -38,11 +38,16 @@ CREATE TABLE `ov_auditoria` (
   `descripcion_producto` text NOT NULL,
   `precio_producto` varchar(100) NOT NULL,
   `foto_producto` varchar(100) NOT NULL,
-  `dni_cliente` varchar(20) NOT NULL,
   `nombre_cliente` varchar(50) NOT NULL,
+  `fecha_cliente` varchar(20) NOT NULL,
+  `obra_social` varchar(50) NOT NULL,
+  `laboratorio` varchar(50) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `doctor` varchar(50) NOT NULL,
+  `foto_receta` varchar(150) NOT NULL,
+  `dni_cliente` varchar(20) NOT NULL,
   `apellido_cliente` varchar(50) NOT NULL,
-  `descripcion_cliente` varchar(255) NOT NULL,
-  `obra_social` varchar(50) NOT NULL
+  `descripcion_cliente` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -53,11 +58,16 @@ CREATE TABLE `ov_auditoria` (
 
 CREATE TABLE `ov_clientes` (
   `id_cliente` int(100) NOT NULL,
-  `dni_cliente` varchar(15) NOT NULL,
   `nombre_cliente` varchar(50) NOT NULL,
+  `fecha_cliente` varchar(50) NOT NULL,
+  `obra_social` varchar(50) NOT NULL,
+  `laboratorio` varchar(50) NOT NULL,
+  `telefono` varchar(20) NOT NULL,
+  `doctor` varchar(50) NOT NULL,
+  `foto_receta` varchar(100) NOT NULL,
+  `dni_cliente` varchar(15) NOT NULL,
   `apellido_cliente` varchar(50) NOT NULL,
   `descripcion` text NOT NULL,
-  `obra_social` varchar(50) NOT NULL,
   `fecha_creacion` varchar(20) NOT NULL,
   `codigo_interno` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -106,7 +116,7 @@ CREATE TABLE `ov_productos` (
   `nombre_producto` varchar(50) NOT NULL,
   `descripcion` text NOT NULL,
   `precio_producto` varchar(10) NOT NULL,
-  `foto_producto` varchar(30) NOT NULL,
+  `foto_producto` varchar(100) NOT NULL,
   `thumb_producto` varchar(50) NOT NULL,
   `estado_producto` varchar(20) NOT NULL,
   `fecha_creacion` varchar(20) NOT NULL,
@@ -157,6 +167,27 @@ CREATE TABLE `ov_usuarios` (
   `fecha_registro` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `version_soft`
+--
+
+CREATE TABLE `version_soft` (
+  `id_version` int(10) NOT NULL,
+  `version` varchar(10) NOT NULL,
+  `fecha` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `version_soft`
+--
+
+INSERT INTO `version_soft` (`id_version`, `version`, `fecha`, `descripcion`) VALUES
+(1, '1.0', '11-04-2023', 'Sistema de registro de productos y clientes, con buscador en pantalla y buscador rápido. Interface de creación, modificación y eliminación de productos y clientes con sistema de auditoria.'),
+(2, '1.1', '17-04-2023', 'Fix de imágenes a nombres de archivos por código interno, correcciones de css para el buscador rápido y el header. Se crea la sección de registro de nuevos usuarios. Se modifican los campos inputs de la carga de clientes. Se incorporó una vista previa de la receta al situar el mouse sobre la imagen.');
+
 --
 -- Índices para tablas volcadas
 --
@@ -204,6 +235,12 @@ ALTER TABLE `ov_usuarios`
   ADD PRIMARY KEY (`id_usuario`);
 
 --
+-- Indices de la tabla `version_soft`
+--
+ALTER TABLE `version_soft`
+  ADD PRIMARY KEY (`id_version`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -217,7 +254,7 @@ ALTER TABLE `ov_auditoria`
 -- AUTO_INCREMENT de la tabla `ov_clientes`
 --
 ALTER TABLE `ov_clientes`
-  MODIFY `id_cliente` int(100) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_cliente` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `ov_estados`
@@ -248,6 +285,12 @@ ALTER TABLE `ov_root`
 --
 ALTER TABLE `ov_usuarios`
   MODIFY `id_usuario` int(50) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `version_soft`
+--
+ALTER TABLE `version_soft`
+  MODIFY `id_version` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

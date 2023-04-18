@@ -44,7 +44,7 @@ foreach($query as $producto){
                     <table>
                         <tr>
                             <td class="Label"><label for="codigo_producto">Código del producto: </label></td>
-                            <td><div style="max-width: 200px; color:beige;">'.$producto['codigo_producto'].'</div></td>
+                            <td><div style="width: 200px; color:beige;">'.$producto['codigo_producto'].'</div></td>
                             <td rowspan="7">
                                     <section>
                                     <img class="img-responsive" src="'.$fotoP.'" />
@@ -53,17 +53,17 @@ foreach($query as $producto){
                         </tr>
                         <tr>
                             <td class="Label"><label for="nombre_producto">Nombre del producto: </label></td>
-                            <td><div style="max-width: 200px; color:beige;">'.$producto['nombre_producto'].'</div></td>
+                            <td><div style="width: 200px; color:beige;">'.$producto['nombre_producto'].'</div></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td class="Label" align="top"><label for="descripcion">Descripción: </label></td>
-                            <td><div style="max-width: 200px; color:beige;">'.$producto['descripcion'].'</div></td>
+                            <td><div style="width: 200px; color:beige;">'.$producto['descripcion'].'</div></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td class="Label"><label for="precio_producto">Precio: </label></td>
-                            <td><div style="max-width: 200px; color:beige;">$ '.$producto['precio_producto'].',00 </div></td>
+                            <td><div style="width: 200px; color:beige;">$ '.$producto['precio_producto'].',00 </div></td>
                             <td></td>
                         </tr>
                         <tr>

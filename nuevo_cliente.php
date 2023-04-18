@@ -22,6 +22,21 @@ if(!isset($_SESSION['username'])){
     };     
     }  
     </script>
+    <script type="text/javascript">
+    window.onload=function(){/*from  w w  w.j a v a  2  s.  com*/
+//dd/mm/yyyy
+var date = new Date();
+console.log(date);
+var month = date.getMonth();
+console.log(month);
+var day = date.getDate();
+console.log(day);
+var year = date.getFullYear();
+console.log(year);
+console.log(month+"/"+day+"/"+year);
+    }
+
+      </script>
 
     <title>Alta de cliente / Optica VEO</title>
 </head>
@@ -37,30 +52,49 @@ $fecha_creacion = date("d-M-Y H:i:s");
 					<h1>Cargar nuevo cliente</h1>
 				</span>
 				<br>
-				<form action="./consultas/cargar_cliente.php" method="POST" style="border-collapse: separate; border-spacing: 10px 5px;">
+				<form action="./consultas/cargar_cliente.php" method="POST" enctype="multipart/form-data" style="border-collapse: separate; border-spacing: 10px 5px;">
                     <table>
                         <tr>
-                            <td class="Label"><label for="codigo_cliente">Documento del cliente * </label></td>
-                            <td><input style="width: 300px;" maxlength="8" type="number" name="dni_cliente" required autofocus></td>
+                            <td class="Label"><label for="cliente">Sr/a * </label></td>
+                            <td><input style="width: 250px;" id="cliente" name="nombre_cliente" required autofocus></td>
+                            <td rowspan="7">
+                                <div class="uploadImg">
+                                    <label for="uploadImage1">
+                                    <section class="detalle-imagen">
+                                    <img id="uploadPreview1" class="img-responsive" src="./consultas/docs/img/subir_receta.png" />
+                                    <img title="Sólo archivos JPG, JPEG, PNG & GIF  son permitidos." src='./consultas/docs/img/flecha_subir.gif' class="flechaUpload">
+                                    </section></label>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
-                            <td class="Label" style="color:#9ed2c1;"><label for="nombre_cliente">Nombre del cliente * </label></td>
-                            <td><input style="width: 300px;" type="text" id="nombre_cliente" name="nombre_cliente" autocapitalize="on" autocomplete="off" required></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="Label" style="color:#9ed2c1;"><label for="apellido_cliente">Apellido del cliente * </label></td>
-                            <td><input style="width: 300px;" type="text" id="apellido_cliente" name="apellido_cliente" autocapitalize="on" autocomplete="off" required></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td class="Label"><label for="descripcion">Descripción </label></td>
-                            <td><textarea style="width: 300px;" id="descripcion" name="descripcion"></textarea></td>
+                            <td class="Label" style="color:#9ed2c1;"><label for="fecha_cliente">Fecha * </label></td>
+                            <td><input style="width: 250px;" type="date" id="fecha_cliente" name="fecha_cliente" autocapitalize="on" autocomplete="off" required></td>
                             <td></td>
                         </tr>
                         <tr>
                             <td class="Label"><label for="obra_social">Obra Social </label></td>
-                            <td><input style="width: 300px;" type="text" id="obra_social" name="obra_social" autocomplete="off"></td>
+                            <td><input style="width: 250px;" type="text" id="obra_social" name="obra_social" autocomplete="off"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label"><label for="laboratorio">Laboratorio </label></td>
+                            <td><input type="text" style="width: 250px;" id="laboratorio" name="laboratorio"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label"><label for="telefono">Telefono </label></td>
+                            <td><input type="number" style="width: 250px;" id="telefono" name="telefono"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td class="Label"><label for="doctor">Doctor </label></td>
+                            <td><input type="text" style="width: 250px;" id="doctor" name="doctor"></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><input type="file" name="foto_receta" onchange="previewImage(1);" class="inputfile" id="uploadImage1"/></td>
                             <td></td>
                         </tr>
                         <tr>

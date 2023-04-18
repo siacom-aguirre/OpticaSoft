@@ -33,8 +33,8 @@
 <section class="logVersion" id="infoVersion">
     <center>
         <h1>OpticaSoft</h1>
-        <h3><?php echo "Versión: 1.0"; ?></h3>
-        <h5> <br><?php echo "OpticaSoft es desarrollado por SiacomTeK.";?><br> Sr. Emmanuel Aguirre.<br> <?php echo "Copyright: ".date('Y'); ?><br> <br>Contacto: <br>+54 9 (376) 488-6867. <br></h5>
+        <h3><?php echo "Versión: 1.1"; ?></h3>
+        <h5> <br><?php echo "OpticaSoft es desarrollado por SiacomTeK.";?><br> Sr. Emmanuel Aguirre.<br> <?php echo "Copyright: ".date('Y'); ?><br> <br>Contacto: <br>+54 (376) 488-6867. <br><br> <a href="./consultas/cambios_version">Cambios de versión.</a></h5>
     </center>
 </section>
 

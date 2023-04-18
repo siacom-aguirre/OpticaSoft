@@ -22,6 +22,7 @@ if(!empty($_POST)){
     OR nombre_producto LIKE LOWER('%".$aKeyword[0]."%')
     OR descripcion LIKE LOWER('%".$aKeyword[0]."%')
     OR precio_producto LIKE LOWER('%".$aKeyword[0]."%')
+    ORDER BY codigo_producto ASC
     ";
   
     for($i = 1; $i < count($aKeyword); $i++) {
