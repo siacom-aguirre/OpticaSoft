@@ -16,21 +16,17 @@ if(!isset($_SESSION['username'])){
     <title>Eliminar producto / Optica VEO</title>
 </head>
 <body>
-<?php
+    <?php
 date_default_timezone_set('America/Argentina/Buenos_Aires'); 
 $fecha_creacion = date("d-M-Y H:i:s");
 
 $articulo = $_GET['articulo'];
-
-include 'footer.php';
 ?>
-</body>
-</html>
-<center>
+    <center>
     <div class="advertenciaE">
         <br>
         <h3>¿Seguro que desea eliminar este artículo?</h3>
-        <h5>Si elimina este artículo de la base de datos, su registro de usuario quedará asentado en la auditoría de Sistema.</h5>
+        <h5>Si elimina este artículo de la base de datos, su registro de usuario quedará asentado en la auditoría del Sistema.</h5>
         <br>
     </div>
     <div class="advConfirmacion">
@@ -42,3 +38,8 @@ include 'footer.php';
         </table>
     </div>
 </center>
+<?php
+include 'footer.php';
+?>
+</body>
+</html>

@@ -5,7 +5,7 @@
             <div class=" col-12 mt-2">
                 <div class="table-responsive">
                     <div class="mb-3">
-                        <input onkeyup="buscar_ahora($('#buscar_1').val());" type="text" class="form-control" id="buscar_1" name="buscar_1" placeholder="BUSCAR">
+                        <input onkeyup="buscar_ahora($('#buscar_1').val());" type="text" class="form-control" id="buscar_1" name="buscar_1" placeholder="BUSCAR CLIENTES" autocomplete="off">
                     </div>
                     <div class="card col-12 mt-5">
                         <div class="card-body">

@@ -32,9 +32,9 @@ function getCatalogo(){
         $results = $query -> fetchAll(PDO::FETCH_OBJ);
         if ($query->rowCount() > 0) {
             foreach ($results as $cliente) { 
-                $cliente->foto_receta != '.' 
-                ? $foto = './consultas/docs/img_recetas/'.$cliente->foto_receta 
-                : $foto = './consultas/docs/img/sin_imagen.png';
+                $cliente->foto_receta == '.' || $cliente->foto_receta == '' 
+                ? $foto = './consultas/docs/img/sin_imagen.png'
+                : $foto = './consultas/docs/img_recetas/'.$cliente->foto_receta;
 
                 echo "<tr class='act'>
                     <td class='fotoProducto'><a href='?lnk=detalle_cl&codigo={$cliente->codigo_interno}'><img src='{$foto}'></a></td>

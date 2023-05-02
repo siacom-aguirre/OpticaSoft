@@ -36,10 +36,10 @@ $sql = "SELECT * FROM ov_productos WHERE codigo_interno='{$codigo}'";
 $query = connect()->prepare($sql);
 $query->execute();
 foreach($query as $producto){
-    if($producto['foto_producto'] != ''){
-        $fotoP = './consultas/docs/img_productos/'.$producto['foto_producto'];
-    }else{
+    if($producto['foto_producto'] == '' || $producto['foto_producto'] == '.'){
         $fotoP = './consultas/docs/img/sin_imagen.png';
+    }else{
+        $fotoP = './consultas/docs/img_productos/'.$producto['foto_producto'];
     }
     echo '<center>
     <div id="contenido">

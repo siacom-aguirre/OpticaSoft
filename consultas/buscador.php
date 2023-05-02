@@ -15,8 +15,11 @@ if(!empty($_POST)){
         : $string;
     }
 
-    $aKeyword = explode(" ", $_POST['buscar']);
-    $filtro = "WHERE nombre_producto LIKE LOWER('%".$aKeyword[0]."%') OR descripcion LIKE LOWER('%".$aKeyword[0]."%')";
+    $aKeyword = explode(" ", str_replace(' ', '_', $_POST['buscar']));
+    $filtro = "WHERE codigo_producto LIKE LOWER('%".$aKeyword[0]."%') 
+    OR nombre_producto LIKE LOWER('%".$aKeyword[0]."%')
+    OR descripcion LIKE LOWER('%".$aKeyword[0]."%')
+    OR precio_producto LIKE LOWER('%".$aKeyword[0]."%')";
     $query ="SELECT * FROM ov_productos 
     WHERE codigo_producto LIKE LOWER('%".$aKeyword[0]."%') 
     OR nombre_producto LIKE LOWER('%".$aKeyword[0]."%')
@@ -54,11 +57,11 @@ if(!empty($_POST)){
 
             $idProd = $row['codigo_producto'];
             echo "<div><tr class='resul'>
-                <td>". resaltar_frase($row['codigo_producto'] ,$_POST['buscar']) . "</td>
+                <td style='width:100px;'>". resaltar_frase($row['codigo_producto'] ,$_POST['buscar']) . "</td>
                 <td>". resaltar_frase($row['nombre_producto'] ,$_POST['buscar']) . "</td>
                 <td>". resaltar_frase($row['descripcion'] ,$_POST['buscar']) . "</td>
-                <td>$ ". resaltar_frase($row['precio_producto'] ,$_POST['buscar']) . ",00</td>
-                <td><a href='?lnk=detalle&codigo=". $row['codigo_interno'] . "'>abrir</a></td></tr></div></div>";
+                <td style='width:100px;'>$ ". resaltar_frase($row['precio_producto'] ,$_POST['buscar']) . ",00</td>
+                <td style='width:50px;'><a href='?lnk=detalle&codigo=". $row['codigo_interno'] . "'>abrir</a></td></tr></div></div>";
         }
         echo "</table>";
     } else {

@@ -36,10 +36,10 @@ $sql = "SELECT * FROM ov_clientes WHERE codigo_interno='{$codigo}'";
 $query = connect()->prepare($sql);
 $query->execute();
 foreach($query as $cliente){
-    if($cliente['foto_receta'] != '.'){
-        $fotoP = './consultas/docs/img_recetas/'.$cliente['foto_receta'];
-    }else{
+    if($cliente['foto_receta'] == '.' || $cliente['foto_receta'] == '' ){
         $fotoP = './consultas/docs/img/subir_receta.png';
+    }else{
+        $fotoP = './consultas/docs/img_recetas/'.$cliente['foto_receta'];
     }
     echo '<center>
     <div id="contenido">
