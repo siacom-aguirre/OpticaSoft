@@ -1,6 +1,6 @@
 <?php
 
-$codigo_interno = md5($_POST['nombre_producto']).'-'.$_POST['codigo_producto'];
+$codigo_interno = md5(str_shuffle(strtolower($_POST['nombre_producto'])));
 
 $tipo_archivo = strtolower(pathinfo($_FILES["foto_producto"]["name"],PATHINFO_EXTENSION));
 $archivo = str_replace($_FILES["foto_producto"]["name"], $codigo_interno, $_FILES["foto_producto"]["name"]).'.'.$tipo_archivo;

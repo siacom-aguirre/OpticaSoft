@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="./consultas/docs/img/favicon.ico">
 <?php
 include_once './consultas/vaf_nucleo.php';
 fileExist();

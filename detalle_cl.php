@@ -31,11 +31,12 @@ $sql = "SELECT * FROM ov_clientes WHERE codigo_interno='{$codigo}'";
 $query = connect()->prepare($sql);
 $query->execute();
 foreach($query as $cliente){
-    if($cliente['foto_receta'] != '.'){
-        $fotoP = './consultas/docs/img_recetas/'.$cliente['foto_receta'];
-    }else{
+    if($cliente['foto_receta'] == '.' || $cliente['foto_receta'] == ''){
         $fotoP = './consultas/docs/img/subir_receta.png';
+    }else{
+        $fotoP = './consultas/docs/img_recetas/'.$cliente['foto_receta'];
     }
+    isset($_SESSION['username']) ? $editCL = '<a href="?lnk=modificar_cl&codigo='.$cliente['codigo_interno'].'"><div class="editP"><i class="bx bx-edit"></i> editar</div></a>' : $editCL = '';
     echo '<center>
     <div id="contenido">
 			<div style="margin: auto; width: 800px; border-collapse: separate; border-spacing: 10px 5px;">
@@ -88,6 +89,7 @@ foreach($query as $cliente){
                         <tr>
                             <td align="right"></td>
                             <td align="center"></td>
+                            <td align="center">'.$editCL.'</td>
                         </tr>
                     </table>
                 <br>

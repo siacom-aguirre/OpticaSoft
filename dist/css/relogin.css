@@ -1,0 +1,140 @@
+@import url("./fonts.css");
+*{
+    font-family: "Poppins", sans-serif;
+}
+body{
+    margin: 0;
+}
+.body_usuarios .imgfondo{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    filter: blur(100px);
+}
+.body_usuarios{
+    width: 100%;
+    height: 100%;
+}
+.usuarios{
+    max-height: 200px;
+    min-width: 200px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+.usuario, 
+.usuariox{
+    display:inline-block;
+    width: 150px;
+    text-align: center;
+}
+.imagen,
+.usuario img,
+.nombre,
+.footer{
+    transition: .4s;
+}
+.imagen{
+    background-color: black;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid #d6d6d6;
+}
+.usuario img,
+.usuariox img{
+    margin: 0 auto;
+    max-width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+.usuario:hover img{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+.usuario:hover .imagen{
+    border: 4px solid #3a524f;
+}
+.nombre{
+    text-align: center;
+    color: white;
+}
+.usuario:hover .nombre{
+    color: aquamarine;
+}
+input[type="password"]{
+    text-align: center;
+    width: 95%;
+    height: 20px;
+    font-size: small;
+    font-weight: 300;
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, .3);
+    color: white;
+    border: 0 transparent;
+    border-radius: 5px;
+    transition: .4s;
+}
+input[type="password"]:focus {
+    border-bottom: 2px solid rgb(0, 173, 167);
+    outline: none;
+    background-color: rgba(255, 255, 255, .5);
+}
+.usuariox .key {
+    position:absolute;
+    right:32px;
+    top:151px;
+    height: 12px;
+    width: 12px;
+    filter: opacity(50%);
+}
+.footer{
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: aliceblue;
+}
+.footer:hover{
+    filter: invert(100%);
+    text-shadow: 0 0 10px #303030;
+}
+.errorLogin {
+    z-index: 99;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid rgba(255, 99, 71, 0.8);
+    background-color: rgba(255, 99, 71, 0.3);
+    backdrop-filter: blur(3px);
+    border-radius: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #bababa;
+    text-align: center;
+    line-height: 2;
+    font-size: small;
+    width: 100%;
+    transform: translateY(180px);
+    animation: elog 1s linear;
+}
+@keyframes elog {
+0% {
+    opacity: 0;
+    transform: translateY(110px);
+}
+100% {
+    opacity: 80%;
+    transform: translateY(180px);
+}
+}
+.recuperarpass {
+    text-decoration: none;
+}
+.divrecpass:hover {
+    border-radius: 0 0 5px 5px;
+    margin-bottom: 0px;
+    bottom: 0;
+}

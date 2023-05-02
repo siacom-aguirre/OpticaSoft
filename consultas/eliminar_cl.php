@@ -22,8 +22,6 @@ $fecha_creacion = date("d-M-Y H:i:s");
 
 $cliente = $_GET['cl'];
 $nombre = ucwords(str_replace('_', ' ', $_GET['cn']));
-
-include 'footer.php';
 ?>
 </body>
 </html>
@@ -31,7 +29,7 @@ include 'footer.php';
     <div class="advertenciaE">
         <br>
         <h3>¿Seguro que desea eliminar a <u><?php echo $nombre; ?></u> de la lista?</h3>
-        <h5>Si elimina este cliente de la base de datos, su registro de usuario quedará asentado en la auditoría de Sistema.</h5>
+        <h5>Si elimina este cliente de la base de datos, su registro de usuario quedará asentado en la auditoría del Sistema.</h5>
         <br>
     </div>
     <div class="advConfirmacion">
@@ -43,3 +41,6 @@ include 'footer.php';
         </table>
     </div>
 </center>
+<?php
+include 'footer.php';
+?>

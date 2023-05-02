@@ -35,6 +35,7 @@
 </div>
 </center>
 <?php
+echo '<div style="height: 80px"></div>';
 include 'footer.php';
 ?>
 </body>

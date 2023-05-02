@@ -1,0 +1,59 @@
+ALTER TABLE `ov_auditoria`
+  ADD COLUMN IF NOT EXISTS `id_auditoria` int(255) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `username` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `nombre_usuario` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `accion` varchar(10) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `fecha_auditoria` varchar(30) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `codigo_producto` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `nombre_producto` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `descripcion_producto` text NOT NULL,
+  ADD COLUMN IF NOT EXISTS `precio_producto` varchar(100) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `foto_producto` varchar(100) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `nombre_cliente` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `fecha_cliente` varchar(20) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `obra_social` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `laboratorio` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `telefono` varchar(20) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `doctor` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `foto_receta` varchar(150) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `dni_cliente` varchar(20) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `apellido_cliente` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `descripcion_cliente` varchar(255) NOT NULL;
+
+ALTER TABLE `ov_clientes`
+  ADD COLUMN IF NOT EXISTS `id_cliente` int(100) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `nombre_cliente` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `fecha_cliente` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `obra_social` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `laboratorio` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `telefono` varchar(20) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `doctor` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `foto_receta` varchar(100) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `dni_cliente` varchar(15) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `apellido_cliente` varchar(50) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `descripcion` text NOT NULL,
+  ADD COLUMN IF NOT EXISTS `fecha_creacion` varchar(20) NOT NULL,
+  ADD COLUMN IF NOT EXISTS `codigo_interno` text NOT NULL;
+
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE TABLE IF NOT EXISTS `version_soft` (
+  `id_version` int(10) NOT NULL,
+  `version` varchar(10) NOT NULL,
+  `fecha` varchar(50) NOT NULL,
+  `descripcion` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `version_soft` (`id_version`, `version`, `fecha`, `descripcion`) VALUES
+(1, '1.0', '11-04-2023', 'Sistema de registro de productos y clientes, con buscador en pantalla y buscador rápido. Interface de creación, modificación y eliminación de productos y clientes con sistema de auditoria.'),
+(2, '1.1', '17-04-2023', 'Fix de imágenes a nombres de archivos por código interno, correcciones de css para el buscador rápido y el header. Se crea la sección de registro de nuevos usuarios. Se modifican los campos inputs de la carga de clientes. Se incorporó una vista previa de la receta al situar el mouse sobre la imagen.');
+
+ALTER TABLE `version_soft`
+  ADD PRIMARY KEY (`id_version`);
+  
+ALTER TABLE `version_soft`
+  MODIFY `id_version` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+COMMIT;

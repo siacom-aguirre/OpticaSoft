@@ -31,11 +31,12 @@ $sql = "SELECT * FROM ov_productos WHERE codigo_interno='{$codigo}'";
 $query = connect()->prepare($sql);
 $query->execute();
 foreach($query as $producto){
-    if($producto['foto_producto'] != ''){
-        $fotoP = './consultas/docs/img_productos/'.$producto['foto_producto'];
-    }else{
+    if($producto['foto_producto'] == '' || $producto['foto_producto'] == '.'){
         $fotoP = './consultas/docs/img/sin_imagen.png';
+    }else{
+        $fotoP = './consultas/docs/img_productos/'.$producto['foto_producto'];
     }
+    isset($_SESSION['username']) ? $editP = '<a href="?lnk=modificar&codigo='.$producto['codigo_interno'].'"><div class="editP"><i class="bx bx-edit"></i> editar</div></a>' : $editP = '';
     echo '<div id="contenido">
 			<div style="margin: auto; width: 800px; border-collapse: separate; border-spacing: 10px 5px;">
             <br>
@@ -45,7 +46,7 @@ foreach($query as $producto){
                         <tr>
                             <td class="Label"><label for="codigo_producto">Código del producto: </label></td>
                             <td><div style="width: 200px; color:beige;">'.$producto['codigo_producto'].'</div></td>
-                            <td rowspan="7">
+                            <td rowspan="4">
                                     <section>
                                     <img class="img-responsive" src="'.$fotoP.'" />
                                     </section>
@@ -69,11 +70,7 @@ foreach($query as $producto){
                         <tr>
                             <td></td>
                             <td></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td align="right"></td>
-                            <td align="center"></td>
+                            <td align="center">'.$editP.'</td>
                         </tr>
                     </table>
                 <br>

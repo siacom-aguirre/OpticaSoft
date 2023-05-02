@@ -15,7 +15,7 @@ if(!empty($_POST)){
         : $string;
     }
 
-    $aKeyword = explode(" ", $_POST['buscar']);
+    $aKeyword = explode(" ", str_replace(' ', '_', $_POST['buscar']));
     $filtro = "WHERE nombre_cliente LIKE LOWER('%".$aKeyword[0]."%') OR descripcion LIKE LOWER('%".$aKeyword[0]."%')";
     $query ="SELECT * FROM ov_clientes
     WHERE nombre_cliente LIKE LOWER('%".$aKeyword[0]."%') 
@@ -57,7 +57,7 @@ if(!empty($_POST)){
                 <td>". resaltar_frase($row['fecha_cliente'] ,$_POST['buscar']) . "</td>
                 <td>". resaltar_frase($row['telefono'] ,$_POST['buscar']) . "</td>
                 <td>". resaltar_frase($row['obra_social'] ,$_POST['buscar']) . "</td>
-                <td><a href='?lnk=detalle_cl&codigo=". $row['codigo_interno'] . "'>abrir</a></td></tr></div></div>";
+                <td style='width:50px;'><a href='?lnk=detalle_cl&codigo=". $row['codigo_interno'] . "'>abrir</a></td></tr></div></div>";
         }
         echo "</table>";
     } else {
