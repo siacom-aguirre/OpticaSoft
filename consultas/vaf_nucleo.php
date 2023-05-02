@@ -253,7 +253,7 @@ function trProductos(){
     <th>Código</th>
     <th>Producto</th>
     <th>Descripción</th>
-    <th>Precio</th>';
+    <th style="width: 150px;">Precio</th>';
     if(isset($_SESSION['username'])){
         echo '<th colspan="2">Opciones</th>
         <th>Estado</th>';

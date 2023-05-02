@@ -13,7 +13,7 @@ if(!isset($_SESSION['username'])){
   $td2 = '';
 } else {
 
-  $hNombre = '<i class="bx bxs-user"></i> '.getNombre($_SESSION['username']).' '.getApellido($_SESSION['username']);
+  $hNombre = '<a href="?lnk=perfil"><i class="bx bxs-user"></i> '.getNombre($_SESSION['username']).' '.getApellido($_SESSION['username']).'</a>';
   $hCerrar = '<i class="bx bx-log-out"></i> <a href="consultas/logout">Cerrar sesión</a>';
   $hFyH = date('d/m/Y - h:i a');
   $hCargaP = '<div class="nuevoProd"><a href="?lnk=nuevo_producto"><i class="bx bxs-file-plus"></i> Nuevo producto</a></div>';
@@ -32,7 +32,8 @@ if(!isset($_SESSION['username'])){
     <table class='header'><tr>
     <td rowspan="2" class="headerLogo"><a href="?lnk=aplicacion"><img style="height: 50px;" src="./consultas/docs/img/logo400.png" class="logoLocal"></a></td>
     <td <?php echo $rowspan; ?> class="headerNombre"><?php echo $hNombre; ?></td>
-    <td rowspan="2" class="HeaderFyH"><?php echo $hFyH; ?></td>
+    <td rowspan="2" class="HeaderFyH"><div class="reloj"><p size='4' class="fecha"></p><p class="tiempo"></p></div>
+</td>
     <?php echo $td1; ?>
     </tr>
     <tr>
@@ -44,3 +45,4 @@ if(!isset($_SESSION['username'])){
 </div>
 </center>  
 </div>
+<script src="./consultas/js/hora.js"></script>

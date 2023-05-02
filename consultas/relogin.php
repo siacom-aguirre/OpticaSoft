@@ -1,17 +1,9 @@
 <!DOCTYPE html>
+<html lang="es">
 <html>
 <?php
 include_once './conexion.php';
 include './vaf_nucleo.php';
-
-date_default_timezone_set('America/Argentina/Buenos_Aires');
-$hora = date('H');
-
-if($hora >= 06 && $hora <= 19){
-    $horacss = 'href="../dist/css/claro.css"';
-} else {
-    $horacss = 'href="../dist/css/dark.css"';
-}
 
 ?>
 <?php
@@ -28,40 +20,47 @@ if (isset($_POST['login'])) {
         $_SESSION['username'] = $usuario;
         header('location: ../index');
     }else{
-        $errorLogin = 'El usuario y la contraseña no coinciden.';
+        $errorLogin = 'Clave incorrecta.';
     }
 }
 ?>
 
 <head>
-    <link rel="stylesheet" href="../dist/css/main.css">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" <?php print_r($horacss); ?>>
+    <link rel="stylesheet" href="../dist/css/relogin.css">
+    <script src="./js/fondo-min.js"></script>
+    <script>
+        function loadImage()
+        {
+            $("#image").load("fondos.php");
+        }
+        $(document).ready(function(){
+            loadImage();
+            // indicamos que llame a la funcion loadimage cada 5 segundos
+            setInterval("loadImage()",86400);
+        })
+    </script>
+
     <title>Optica Veo | Inicio de sesión</title>
 </head>
 
 <body>
-    <div class="inicio_sesion">
-        <div><img src="../consultas/docs/img/veo_logo.png"></div>
-        <div style="width: 300px;" class="container my-5">
-            <form action="" method="POST">
-                <?php
-                if (isset($errorLogin)) {
-                    echo "
-                <div class='errorLogin'>
-                    <div>{$errorLogin}</div>
-                    <a  class='recuperarpass' href='#'><div class='divrecpass'>Recuperar contraseña</div></a>
-                </div>";
-                };
-                numForm($arrIn[0],$arrIn[2],$arrIn[4],$arrIn[5][0]);
-                passForm($arrIn[1],$arrIn[3],$arrIn[4],$arrIn[5][0]);
-                btnSubmit("btn");
-                ?>
-            </form>
-        </div>
-        <a href="nuevo_usuario"><div class="nuevo_usu">Nuevo usuario</div></a>
-    </div>
-    <?php include('../footer.php'); ?>
-</body>
+    <div class="body_usuarios">
+        <div id="image"></div>
+        <div class="usuarios">
+            <?php
+            if (isset($errorLogin)) {
+                echo "
+            <div class='errorLogin'>
+                <div>{$errorLogin}</div>
+            </div>";
+            };
 
+            $pagina = isset($_GET['lnk']) ? strtolower($_GET['lnk']) : 'usuarios';
+            require_once './' . $pagina . '.php';
+            ?>
+        </div>
+    </div>
+    <a href='nuevo_usuario'><div class="footer"><i class='bx bxs-id-card'></i> registrarse</div></a>
+</body>
 </html>

@@ -1,11 +1,11 @@
 <?php
 
-$codigo_interno = md5($_POST['nombre_cliente']);
+$codigo_interno = md5(str_shuffle(strtolower($_POST['nombre_cliente'])));
 
 $tipo_archivo = strtolower(pathinfo($_FILES["foto_receta"]["name"],PATHINFO_EXTENSION));
 $archivo = str_replace($_FILES["foto_receta"]["name"], $codigo_interno, $_FILES["foto_receta"]["name"]).'.'.$tipo_archivo;
 	
-Nuevocliente(ucfirst($_POST['nombre_cliente']), $_POST['fecha_cliente'], ucfirst($_POST['obra_social']), ucfirst($_POST['laboratorio']), $_POST['telefono'], ucfirst($_POST['doctor']), $archivo, $_POST['fecha_creacion'], $codigo_interno);
+Nuevocliente(ucwords($_POST['nombre_cliente']), $_POST['fecha_cliente'], strtoupper($_POST['obra_social']), strtoupper($_POST['laboratorio']), $_POST['telefono'], ucwords($_POST['doctor']), $archivo, $_POST['fecha_creacion'], $codigo_interno);
 
 function Nuevocliente($nombre_cliente, $fecha_cliente, $obra_social, $laboratorio, $telefono, $doctor, $foto_receta, $fecha_creacion, $codigo_interno)
 {
@@ -71,7 +71,7 @@ function getApellido($user){
 }
 $nombre_user = getNombre($_SESSION['username']).' '.getApellido($_SESSION['username']);
 
-auditoria($_SESSION['username'], $nombre_user, 'Insert', $_POST['fecha_creacion'], ucfirst($_POST['nombre_cliente']), $_POST['fecha_cliente'], ucfirst($_POST['obra_social']), ucfirst($_POST['laboratorio']), $_POST['telefono'], ucfirst($_POST['doctor']), $archivo);
+auditoria($_SESSION['username'], $nombre_user, 'Insert', $_POST['fecha_creacion'], ucwords($_POST['nombre_cliente']), $_POST['fecha_cliente'], strtoupper($_POST['obra_social']), strtoupper($_POST['laboratorio']), $_POST['telefono'], ucwords($_POST['doctor']), $archivo);
 
 function auditoria($username, $nombre_usuario, $accion, $fecha_auditoria, $nombre_cliente, $fecha_cliente, $obra_social, $laboratorio, $telefono, $doctor, $foto_receta){
 	$sentencia= "INSERT INTO ov_auditoria (username, nombre_usuario, accion, fecha_auditoria, nombre_cliente, fecha_cliente, obra_social, laboratorio, telefono, doctor, foto_receta) VALUES ('".$username."', '".$nombre_usuario."', '".$accion."', '".$fecha_auditoria."', '".$nombre_cliente."', '".$fecha_cliente."', '".$obra_social."', '".$laboratorio."', '".$telefono."', '".$doctor."', '".$foto_receta."') ";

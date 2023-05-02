@@ -37,7 +37,7 @@
         <h5> <br><?php echo "OpticaSoft es desarrollado por SiacomTeK.";?><br> Sr. Emmanuel Aguirre.<br> <?php echo "Copyright: ".date('Y'); ?><br> <br>Contacto: <br>+54 (376) 488-6867. <br><br> <a href="./consultas/cambios_version">Cambios de versión.</a></h5>
     </center>
 </section>
-
+<div class="footerMuerto">
 <script type="text/javascript">
     let infoVersion = document.getElementById('infoVersion');
     let infoBtn = document.getElementById('infoBtn');
